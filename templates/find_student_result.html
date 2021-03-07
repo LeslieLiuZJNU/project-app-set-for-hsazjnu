@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询结果</title>
+</head>
+<body>
+<div>
+    姓名：{{ list[0]['full_name'] }}
+    <br>
+    年级：{{ list[0]['student_grade_name'] }}
+    <br>
+    班级：{{ list[0]['student_organization_id'] }}（数据可能有误）
+    <br>
+    学号：{{ list[0]['school_card_number'] }}
+    <br>
+</div>
+<br>
+<br>
+{% for student in list %}
+    <div>
+        日期：{{ student['class_date'] }}
+        <br>
+        星期：{{ student['day'] }}（数据可能有误）
+        <br>
+        上课时间：{{ student['start_time']+student['am_or_pm'] }}
+        <br>
+        下课时间：{{ student['end_time']+student['am_or_pm'] }}
+        <br>
+        教学楼：{{ student['building_name'] }}
+        <br>
+        教室：{{ student['room_name'] }}
+        <br>
+        学科：{{ student['subject'] }}
+        <br>
+    </div>
+    <br>
+    <br>
+{% endfor %}
+</body>
+</html>
