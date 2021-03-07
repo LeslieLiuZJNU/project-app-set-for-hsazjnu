@@ -32,13 +32,15 @@ def find_student_submit():
 
 @app.route('/FindStudentResult', methods=['POST'])
 def find_student_result():
-    student_name = request.form.get("student_name")
-    student_json_list = find_student_execute(student_name)
-    if len(student_json_list) != 0:
-        return render_template('find_student_result.html', list=student_json_list)
+    student_name = request.form.get('student_name')
+    if student_name != '':
+        student_json_list = find_student_execute(student_name)
+        if len(student_json_list) != 0:
+            return render_template('find_student_result.html', list=student_json_list)
+        else:
+            return '未找到此人'
     else:
-        return '未找到此人'
+        return render_template('find_student_submit.html', msg='请输入姓名')
 
-
-if __name__ == '__main__':
-    app.run()
+    if __name__ == '__main__':
+        app.run()
