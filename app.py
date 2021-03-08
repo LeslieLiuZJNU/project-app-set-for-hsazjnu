@@ -9,11 +9,11 @@ app = Flask(__name__)
 
 
 def find_student_execute(name):
-    httpClient = None
+    http_client = None
     try:
-        httpClient = http.client.HTTPConnection('10.1.47.99:8000')
-        httpClient.request('GET', '/dataservice/api/1/163?full_name=' + urllib_request.pathname2url(name))
-        response = httpClient.getresponse()
+        http_client = http.client.HTTPConnection('10.1.47.99:8000')
+        http_client.request('GET', '/dataservice/api/1/163?full_name=' + urllib_request.pathname2url(name))
+        response = http_client.getresponse()
         json_string = response.read().decode()
         json_object = json.loads(json_string)
         student_json_list = json_object['data']['rows']
@@ -21,8 +21,8 @@ def find_student_execute(name):
     except Exception as e:
         return e
     finally:
-        if httpClient:
-            httpClient.close()
+        if http_client:
+            http_client.close()
 
 
 @app.route('/FindStudentSubmit')
@@ -42,5 +42,11 @@ def find_student_result():
     else:
         return render_template('find_student_submit.html', msg='请输入姓名')
 
-    if __name__ == '__main__':
-        app.run()
+
+@app.route('/DataDisplay')
+def data_display():
+    return 0
+
+
+if __name__ == '__main__':
+    app.run()
