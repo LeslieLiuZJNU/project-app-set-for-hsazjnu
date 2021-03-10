@@ -25,11 +25,6 @@ def find_student_execute(name):
             http_client.close()
 
 
-@app.route('/')
-def my_echart():
-    return render_template('my_template.html')
-
-
 @app.route('/FindStudentSubmit')
 def find_student_submit():
     return render_template('find_student_submit.html')
@@ -50,7 +45,7 @@ def find_student_result():
 
 @app.route('/DataDisplay')
 def data_display():
-    return 0
+    return render_template('data_display.html')
 
 
 if __name__ == '__main__':
