@@ -50,3 +50,14 @@ def data_display():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+#f=open()
+#json.loads()[data]
+
+#@app.route('/Submit')
+#def sub():
+
+
+#@app.route('/Display')
+#def dis():
