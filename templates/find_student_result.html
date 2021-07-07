@@ -5,12 +5,16 @@
     <title>查询结果</title>
 </head>
 <body>
-<div>
+<div style="text-align: center">
+    <img src="../static/logo.png" width="50" height="50"/>
+    <h1>浙师大附中走班学生查询</h1>
+</div>
+<div style="text-align: center">
     姓名：{{ list[0]['full_name'] }}
     <br>
     年级：{{ list[0]['student_grade_name'] }}
     <br>
-    班级：{{ list[0]['student_organization_id'] }}（数据可能有误）
+    班级：{{ list[0]['student_organization_id'] }}
     <br>
     学号：{{ list[0]['school_card_number'] }}
     <br>
@@ -18,10 +22,12 @@
 <br>
 <br>
 {% for student in list %}
-    <div>
+    <div style="text-align: center">
+        ==========
+        <br>
         日期：{{ student['class_date'] }}
         <br>
-        星期：{{ student['day'] }}（数据可能有误）
+        星期：{{ student['day'] }}
         <br>
         上课时间：{{ student['start_time']+student['am_or_pm'] }}
         <br>
@@ -33,6 +39,7 @@
         <br>
         学科：{{ student['subject'] }}
         <br>
+        ==========
     </div>
     <br>
     <br>
