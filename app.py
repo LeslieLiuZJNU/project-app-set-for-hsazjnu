@@ -42,6 +42,11 @@ def find_student_picture(id):
             http_client.close()
 
 
+@app.route('/')
+def index():
+    return 'hello world!'
+
+
 @app.route('/FindStudentSubmit')
 def find_student_submit():
     return render_template('find_student_submit.html')
