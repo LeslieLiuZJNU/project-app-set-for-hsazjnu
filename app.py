@@ -1,11 +1,11 @@
 import http.client
 from urllib import request as urllib_request
-from flask import Flask
-from flask import render_template
-from flask import request
+from flask import Flask, render_template, request
 import json
 
 app = Flask(__name__)
+
+cook: bool = False
 
 
 def find_student_class(name):
@@ -45,6 +45,23 @@ def find_student_picture(id):
 @app.route('/')
 def index():
     return 'hello world!'
+
+
+@app.route('/pepper')
+def pepper():
+    global cook
+    if not cook:
+        cook = True
+        print("接收到Pepper请求")
+    return ""
+
+
+@app.route('/raspberry')
+def raspberry():
+    global cook
+    if cook:
+        cook = False
+        return "1"
 
 
 @app.route('/FindStudentSubmit')
