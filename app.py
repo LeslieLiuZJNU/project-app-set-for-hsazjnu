@@ -2,6 +2,8 @@ import http.client
 from urllib import request as urllib_request
 from flask import Flask, render_template, request
 import json
+import time
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -87,6 +89,30 @@ def find_student_result():
 @app.route('/DataDisplay')
 def data_display():
     return render_template('data_display.html')
+
+
+@app.route('/Attendance')
+def attendance():
+    http_client = None
+    id_number = '330702197803071216'
+    id_time = '2021-04-08'
+    try:
+        http_client = http.client.HTTPConnection('10.1.47.99:8000')
+        http_client.request('GET', '/dataservice/api/587/171?time=' + urllib_request.pathname2url(id_time)+'&id_number='+urllib_request.pathname2url(id_number))
+        response = http_client.getresponse()
+        json_string = response.read().decode()
+        json_object = json.loads(json_string)
+        return '1'
+        student_json_list = json_object['data']['rows']
+        if len(student_json_list) != 0:
+            return 'zhaodao'
+        else:
+            return '未找到此人'
+    except Exception as e:
+        return e
+    finally:
+        if http_client:
+            http_client.close()
 
 
 if __name__ == '__main__':
