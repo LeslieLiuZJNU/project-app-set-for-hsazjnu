@@ -9,7 +9,7 @@ if __name__ == '__main__':
     dt_now = datetime.datetime.fromtimestamp(time_now)
     time_str = dt_now.strftime('%Y/%#m/%d')
     print(time_str)
-
+    print(datetime.date.today().__str__())
     # 今天日期
     today = datetime.date.today()
     # 昨天时间

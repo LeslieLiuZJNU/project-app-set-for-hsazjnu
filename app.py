@@ -3,7 +3,7 @@ from urllib import request as urllib_request
 from flask import Flask, render_template, request
 import json
 import time
-from datetime import datetime
+import datetime
 
 app = Flask(__name__)
 
@@ -91,28 +91,43 @@ def data_display():
     return render_template('data_display.html')
 
 
-@app.route('/Attendance')
-def attendance():
+def find_attendance(id_number):
+    id_time = datetime.date.today().__str__()
+    print(id_time)
     http_client = None
-    id_number = '330702197803071216'
-    id_time = '2021-04-08'
     try:
         http_client = http.client.HTTPConnection('10.1.47.99:8000')
-        http_client.request('GET', '/dataservice/api/587/171?time=' + urllib_request.pathname2url(id_time)+'&id_number='+urllib_request.pathname2url(id_number))
+        http_client.request('GET', '/dataservice/api/587/171?id_number=' + urllib_request.pathname2url(id_number) + '&time=' + urllib_request.pathname2url(id_time))
         response = http_client.getresponse()
         json_string = response.read().decode()
         json_object = json.loads(json_string)
-        return '1'
-        student_json_list = json_object['data']['rows']
-        if len(student_json_list) != 0:
-            return 'zhaodao'
-        else:
-            return '未找到此人'
+        attendance_json_list = json_object['data']['rows']
+        return attendance_json_list
     except Exception as e:
         return e
     finally:
         if http_client:
             http_client.close()
+
+
+@app.route('/FindAttendanceSubmit')
+def find_attendance_submit():
+    return render_template('find_attendance_submit.html')
+
+
+@app.route('/FindAttendanceResult', methods=['POST'])
+def find_attendance_result():
+    id_number = request.form.get('id_number')
+    print(id_number)
+    if id_number != '':
+        attendance_json_list = find_attendance(id_number)
+        if len(attendance_json_list) != 0:
+            teacher_name = attendance_json_list[0]['name']
+            return render_template('find_attendance_result.html', list=attendance_json_list)
+        else:
+            return '未找到此人'
+    else:
+        return render_template('find_attendance_submit.html', msg='请输入姓名')
 
 
 if __name__ == '__main__':
