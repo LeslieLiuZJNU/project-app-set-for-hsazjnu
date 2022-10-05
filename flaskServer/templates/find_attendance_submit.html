@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询考勤情况</title>
+</head>
+<body>
+<div style="text-align: center">
+    <img src="../static/logo.png" width="50" height="50"/>
+    <h1>浙师大附中考勤情况查询</h1>
+</div>
+<div style="text-align: center">
+    <form action="/FindAttendanceResult" method="post">
+        <h3>请输入身份证号：</h3>
+        <input type="text" name="id_number" value="" style="width:100px;height:25px"><br/><br/>
+        <input type="submit" value="查询" style="width:50px;height:25px;"><br/><br/>
+        {{ msg }}<br/>
+    </form>
+</div>
+<br/><br/><br/><br/>
+<div style="text-align: center">
+    <a>数据中心&nbsp&nbsp&nbsp&nbsp李永前指导&nbsp&nbsp&nbsp&nbsp刘思远执行</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>考勤情况</title>
+</head>
+<body>
+<div style="text-align: center">
+    <img src="../static/logo.png" width="50" height="50"/>
+    <h1>浙师大附中考勤情况查询</h1><br>
+    <font color="red">数据来源：基础数据系统、人脸识别考勤系统</font>
+</div>
+<br>
+<div style="text-align: center">
+    <br>
+    姓名：{{ list[0]['name'] }}
+    <br>
+</div>
+<br>
+<br>
+{% for attendance in list %}
+    <div style="text-align: center">
+        ==========
+        <br>
+        时间：{{ attendance['created_at'] }}
+        <br>
+        位置：{{ attendance['equipment_name'] }}
+        <br>
+        <img src="{{ attendance['photo_path'] }}" width="250" height="250"/>
+        <br>
+        ==========
+    </div>
+    <br>
+    <br>
+{% endfor %}
+<br/><br/><br/><br/>
+<div style="text-align: center">
+    <a>数据中心&nbsp&nbsp&nbsp&nbsp李永前指导&nbsp&nbsp&nbsp&nbsp刘思远执行</a>
+</div>
+</body>
+</html>
